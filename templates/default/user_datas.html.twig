@@ -1,0 +1,76 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}GSB Frais{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
+          xmlns="http://www.w3.org/1999/html">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic">
+{% endblock %}
+
+{% block body %}
+
+    <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-secondary text-uppercase" id="mainNav">
+        <div class="container"><a class="navbar-brand js-scroll-trigger" href="#page-top">Mes Informations</a><button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" aria-controls="navbarResponsive"
+                                                                                                           aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item mx-0 mx-lg-1" role="presentation"><a
+                                class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ path('default') }}">mes
+                            Fiches</a></li>
+                    <li class="nav-item mx-0 mx-lg-1" role="presentation"><a
+                                class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ path('userDatas') }}">A Propos de
+                            moi</a></li>
+                    <li class="nav-item mx-0 mx-lg-1" role="presentation"><a
+                                class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger btn-danger" href="/logout">Deconnexion</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header class="masthead bg-primary text-white text-center" style="height: 651px;">
+        <div class="container"><img class="img-fluid d-block mx-auto mb-5" src="{{ asset('asset/img/profile.png') }}">
+            <h1>{{ user.nom }}&nbsp{{ user.prenom }}</h1>
+            <hr class="star-light">
+        </div>
+    </header>
+    <div class="features-boxed">
+        <div class="container">
+            <div class="intro">
+                <h2 class="text-center">Mes Informations</h2>
+            </div>
+            <div class="row justify-content-center features">
+                <div class="col-sm-6 col-md-5 col-lg-4 item">
+                    <div class="box"><i class="fas fa-map-marked-alt icon"></i>
+                        <h3 class="name">Adresse</h3>
+                        <p class="description">{{ user.adresse }}</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-5 col-lg-4 item">
+                    <div class="box"><i class="fas fa-mail-bulk icon"></i>
+                        <h3 class="name">Code Postale</h3>
+                        <p class="description">{{ user.cp }}</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-5 col-lg-4 item">
+                    <div class="box"><i class="far fa-building icon"></i>
+                        <h3 class="name">Ville</h3>
+                        <p class="description">{{ user.ville }}</p>
+                    </div>
+                </div>
+                <div class="col-sm-6 col-md-5 col-lg-4 item">
+                    <div class="box"><i class="far fa-calendar-alt icon"></i>
+                        <h3 class="name">Date embauche</h3>
+                        <p class="description">{{ user.dateEmbauche|date('Y-m-d') }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="copyright py-4 text-center text-white" style="height: 75px;">
+        <div class="container"><small>Copyright ©&nbsp;GSB 2019</small></div>
+    </div>
+    {% block javascripts %}
+        <script src="https://kit.fontawesome.com/f07fb1e49e.js"></script>
+    {% endblock %}
+{% endblock %}

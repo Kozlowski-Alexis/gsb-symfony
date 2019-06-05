@@ -1,0 +1,47 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}GSB Frais{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
+          xmlns="http://www.w3.org/1999/html">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic">
+{% endblock %}
+
+{% block body %}
+
+    <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-secondary text-uppercase" id="mainNav">
+        <div class="container"><a class="navbar-brand js-scroll-trigger">GSB Frais</a>
+            <button data-toggle="collapse" data-target="#navbarResponsive"
+                    class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded"
+                    aria-controls="navbarResponsive"
+                    aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item mx-0 mx-lg-1" role="presentation"><a
+                                class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ path('default') }}">mes
+                            Fiches</a></li>
+                    <li class="nav-item mx-0 mx-lg-1" role="presentation"><a
+                                class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ path('userDatas') }}">A Propos de
+                            moi</a></li>
+                    <li class="nav-item mx-0 mx-lg-1" role="presentation"><a
+                                class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger btn-danger" href="/logout">Deconnexion</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header class="masthead bg-primary text-white text-center" style="height: 1025px;"><img
+                src="{{ asset('asset/img/profile.png') }}">
+        <div class="container" style="margin-top: 5vh">
+            <h1>Bonjour&nbsp;</h1><br>
+            <h1>{{ user.nom }}&nbsp{{ user.prenom }}</h1>
+            <hr class="star-light">
+        </div>
+    </header>
+    <div class="copyright py-4 text-center text-white">
+        <div class="container">
+            <small>Copyright ©&nbsp;GSB 2019</small>
+        </div>
+    </div>
+{% endblock %}

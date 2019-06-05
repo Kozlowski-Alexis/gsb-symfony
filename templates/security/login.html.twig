@@ -1,0 +1,29 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Se connecter{% endblock %}
+{% block stylesheets %}
+    <link rel="stylesheet" href="{{ asset('asset/css/signin.css') }}">
+{% endblock %}
+
+{% block body %}
+    {% if error %}
+        <div class="alert alert-danger">
+            {{ error.messageKey | trans(error.messageData, 'security') }}
+        </div>
+    {% endif %}
+
+    <form action="{{ path('login') }}" method="post">
+        <img class="mb-4" src="https://clemtimber.files.wordpress.com/2017/12/logo-gsb.png?w=780" alt="GSB" width="230" height="220">
+        <h1 class="h3 mb-3 font-weight-normal">Veuillez vous connectez</h1>
+
+        <label for="username" class="sr-only">Login</label>
+        <input type="text" id="username" name="_username" class="form-control" value="{{ last_username }}" placeholder="Login" required autofocus>
+
+        <label for="password" class="sr-only">Mot de Passe</label>
+        <input type="password" id="password" name="_password" class="form-control mt-2" placeholder="Mot de passe" required>
+
+        <button class="btn btn-lg buttonblue btn-block mt-4" type="submit" name="log" id="log">Connectez-vous</button>
+        <p class="mt-5 mb-3 text-muted text-center">&copy; Tout droits réservés</p>
+    </form>
+
+{% endblock %}
