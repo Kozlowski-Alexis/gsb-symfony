@@ -1,0 +1,72 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}GSB Frais{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
+          xmlns="http://www.w3.org/1999/html">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic">
+{% endblock %}
+
+{% block body %}
+
+    <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-secondary text-uppercase" id="mainNav">
+        <div class="container"><a class="navbar-brand js-scroll-trigger" href="#page-top">Mes Fiches</a><button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" aria-controls="navbarResponsive"
+                                                                                                                      aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item mx-0 mx-lg-1" role="presentation"><a
+                                class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ path('fichesByUser') }}">mes
+                            Fiches</a></li>
+                    <li class="nav-item mx-0 mx-lg-1" role="presentation"><a
+                                class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ path('userDatas') }}">A Propos de
+                            moi</a></li>
+                    <li class="nav-item mx-0 mx-lg-1" role="presentation"><a
+                                class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger btn-danger" href="/logout">Deconnexion</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid" style="margin-top: 20vh">
+        <div class="table-responsive">
+            <table class="table">
+                <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Mois</th>
+                    <th scope="col">Nb Justificatifs</th>
+                    <th scope="col">Montant valide</th>
+                    <th scope="col">Date de validation</th>
+                    <th scope="col">Etat</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for fiche in fichesFrais %}
+                <tr>
+                    <td>{{ fiche.id }}</td>
+                    <td>{{ fiche.mois }}</td>
+                    <td>{{ fiche.nbJustificatifs }}</td>
+                    <td>{{ fiche.montantValide }}</td>
+                    <td>{{ fiche.dateMotif|date('Y-m-d')}}</td>
+                    {% if fiche.etat.libelle == 'En cours' %}
+                        <td><span class="badge badge-info" style="font-size: 18px;"><i class="far fa-clock"></i></span></td>
+                    {% elseif fiche.etat.libelle == 'Valide' %}
+                        <td><span class="badge badge-success" style="font-size: 18px;"><i class="far fa-check-square"></i></span></td>
+                    {% endif %}
+                    <td><a href="{{ path('fichesInfoByUser', { 'id' : fiche.id }) }}" class="btn btn-outline-secondary">Voir le détail</a></td>
+                </tr>
+                {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="copyright py-4 text-center text-white" style="height: 75px;">
+        <div class="container"><small>Copyright ©&nbsp;GSB 2019</small></div>
+    </div>
+    {% block javascripts %}
+        <script src="https://kit.fontawesome.com/f07fb1e49e.js"></script>
+    {% endblock %}
+{% endblock %}
+

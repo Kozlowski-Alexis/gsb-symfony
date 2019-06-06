@@ -1,0 +1,81 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}GSB Frais{% endblock %}
+
+{% block stylesheets %}
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700"
+          xmlns="http://www.w3.org/1999/html">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:400,700,400italic,700italic">
+{% endblock %}
+
+{% block body %}
+
+    <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-secondary text-uppercase" id="mainNav">
+        <div class="container"><a class="navbar-brand js-scroll-trigger" href="#page-top">Mes Fiches</a><button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" aria-controls="navbarResponsive"
+                                                                                                                      aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item mx-0 mx-lg-1" role="presentation"><a
+                                class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ path('fichesByUser') }}">mes
+                            Fiches</a></li>
+                    <li class="nav-item mx-0 mx-lg-1" role="presentation"><a
+                                class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ path('userDatas') }}">A Propos de
+                            moi</a></li>
+                    <li class="nav-item mx-0 mx-lg-1" role="presentation"><a
+                                class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger btn-danger" href="/logout">Deconnexion</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container-fluid" style="margin-top: 20vh">
+        <h1 class="display-4 pb-3">Détails de la fiche de frais de {{ ficheFrais.mois }} </h1>
+        <div class="table-responsive">
+            <h5>Liste des frais hors forfait</h5>
+            <span class="badge badge-warning mb-3">Montant total : </span>
+            <table class="table table-striped table-light">
+                <thead>
+                <tr>
+                    <th scope="col"> Libelle</th>
+                    <th scope="col"> Montant</th>
+                    <th scope="col"> Date</th>
+                </tr>
+                </thead>
+                <tbody>
+                {% for lFHF in lignesFraisHorsForfait %}
+                    <tr>
+                        <td>{{ lFHF.libelle }}</td>
+                        <td>{{ lFHF.montant }}€</td>
+                        <td>{{ lFHF.date|date('d/m/Y') }}</td>
+                    </tr>
+                {% endfor %}
+                </tbody>
+            </table><br />
+
+            <h5>Liste des frais forfait</h5>
+            <span class="badge badge-warning mb-3">Montant total : </span>
+            <table class="table table-striped table-light">
+                <thead>
+                <tr>
+                    <th scope="col"> Libelle</th>
+                    <th scope="col"> Montant forfait</th>
+                    <th scope="col"> Quantité</th>
+                    <th scope="col"> Montant total</th>
+                    <th scope="col"> Date</th>
+                </tr>
+                </thead>
+                <tbody>
+
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="copyright py-4 text-center text-white" style="height: 75px;">
+        <div class="container"><small>Copyright ©&nbsp;GSB 2019</small></div>
+    </div>
+    {% block javascripts %}
+        <script src="https://kit.fontawesome.com/f07fb1e49e.js"></script>
+    {% endblock %}
+{% endblock %}
+

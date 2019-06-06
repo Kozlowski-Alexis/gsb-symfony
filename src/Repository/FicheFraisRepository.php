@@ -3,6 +3,7 @@
 namespace App\Repository;
 
 use App\Entity\FicheFrais;
+use DateTime;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
 
@@ -19,32 +20,45 @@ class FicheFraisRepository extends ServiceEntityRepository
         parent::__construct($registry, FicheFrais::class);
     }
 
-    // /**
-    //  * @return FicheFrais[] Returns an array of FicheFrais objects
-    //  */
-    /*
-    public function findByExampleField($value)
+    /**
+     * Retourne les fiches de frais en fonction de l'ID de l'utilisateur
+     * @param int $userId
+     * @return mixed
+     */
+    public function findByUser(int $userId)
     {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
-            ->orderBy('f.id', 'ASC')
-            ->setMaxResults(10)
+        return $this->createQueryBuilder('ff')
+            ->andWhere('ff.user = :userId')
+            ->setParameter('userId', $userId)
+            ->orderBy('ff.mois', 'DESC')
             ->getQuery()
-            ->getResult()
-        ;
+            ->getResult();
     }
-    */
 
-    /*
-    public function findOneBySomeField($value): ?FicheFrais
+    /**
+     * Permet de sélectionner une fiche de frais en fonction de l'utilisateur mais aussi d'une date
+     * @param int $userId
+     * @param $date
+     * @return mixed
+     */
+    public function findByUserAndDate(int $userId, $date)
     {
-        return $this->createQueryBuilder('f')
-            ->andWhere('f.exampleField = :val')
-            ->setParameter('val', $value)
+        $newDate = DateTime::createFromFormat('Y-m-d', $date);
+        $month = $newDate->format('m');
+        $year = $newDate->format('Y');
+        $nbrDays = cal_days_in_month(CAL_GREGORIAN, $month, $year);
+        $firstDay = $newDate->format($year . '-' . $month . '-' . '01');
+        $lastDay = $newDate->format($year . '-' . $month . '-' . $nbrDays);
+        $parameters = [
+            'userId' => $userId,
+            'firstDay' => $firstDay,
+            'lastDay' => $lastDay
+        ];
+        return $this->createQueryBuilder('ff')
+            ->andWhere('ff.user = :userId')
+            ->andWhere('ff.moisFiche BETWEEN :firstDay AND :lastDay')
+            ->setParameters($parameters)
             ->getQuery()
-            ->getOneOrNullResult()
-        ;
+            ->getResult();
     }
-    */
 }
