@@ -19,7 +19,7 @@ class FicheFrais
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=6)
+     * @ORM\Column(type="datetime")
      */
     private $mois;
 
@@ -34,7 +34,7 @@ class FicheFrais
     private $montantValide;
 
     /**
-     * @ORM\Column(type="datetime")
+     * @ORM\Column(type="datetime", nullable=true)
      */
     private $dateMotif;
 
@@ -71,12 +71,12 @@ class FicheFrais
         return $this->id;
     }
 
-    public function getMois(): ?string
+    public function getMois(): ?\DateTime
     {
         return $this->mois;
     }
 
-    public function setMois(string $mois): self
+    public function setMois(\DateTime $mois): self
     {
         $this->mois = $mois;
 

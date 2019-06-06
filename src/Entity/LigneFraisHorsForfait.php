@@ -33,7 +33,6 @@ class LigneFraisHorsForfait
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\FicheFrais", inversedBy="ligneFraisHorsForfaits")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $ficheFrais;
 

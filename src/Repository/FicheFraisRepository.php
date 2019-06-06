@@ -56,7 +56,7 @@ class FicheFraisRepository extends ServiceEntityRepository
         ];
         return $this->createQueryBuilder('ff')
             ->andWhere('ff.user = :userId')
-            ->andWhere('ff.moisFiche BETWEEN :firstDay AND :lastDay')
+            ->andWhere('ff.mois BETWEEN :firstDay AND :lastDay')
             ->setParameters($parameters)
             ->getQuery()
             ->getResult();

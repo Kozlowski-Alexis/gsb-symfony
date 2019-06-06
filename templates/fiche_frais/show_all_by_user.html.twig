@@ -11,10 +11,21 @@
 {% block body %}
 
     <nav class="navbar navbar-light navbar-expand-lg fixed-top bg-secondary text-uppercase" id="mainNav">
-        <div class="container"><a class="navbar-brand js-scroll-trigger" href="#page-top">Mes Fiches</a><button data-toggle="collapse" data-target="#navbarResponsive" class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded" aria-controls="navbarResponsive"
-                                                                                                                      aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
+        <div class="container"><a class="navbar-brand js-scroll-trigger">GSB Frais</a>
+            <button data-toggle="collapse" data-target="#navbarResponsive"
+                    class="navbar-toggler navbar-toggler-right text-uppercase bg-primary text-white rounded"
+                    aria-controls="navbarResponsive"
+                    aria-expanded="false" aria-label="Toggle navigation"><i class="fa fa-bars"></i></button>
             <div class="collapse navbar-collapse" id="navbarResponsive">
                 <ul class="nav navbar-nav ml-auto">
+                    <li class="nav-item mx-0 mx-lg-1 dropdown" role="presentation"><button
+                                class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger bg-transparent" style="color: white; border: 1px solid; text-transform: uppercase;font-weight: bold;" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Ajouter frais
+                        </button>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
+                            <a class="dropdown-item" href="{{ path('new_hors_forfait') }}">Frais Hors Forfait</a>
+                            <a class="dropdown-item" href="#!">Frais Forfait</a>
+                        </div>
+                    </li>
                     <li class="nav-item mx-0 mx-lg-1" role="presentation"><a
                                 class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ path('fichesByUser') }}">mes
                             Fiches</a></li>
@@ -42,20 +53,50 @@
                 </tr>
                 </thead>
                 <tbody>
+                {% set i = 0 %}
                 {% for fiche in fichesFrais %}
-                <tr>
-                    <td>{{ fiche.id }}</td>
-                    <td>{{ fiche.mois }}</td>
-                    <td>{{ fiche.nbJustificatifs }}</td>
-                    <td>{{ fiche.montantValide }}</td>
-                    <td>{{ fiche.dateMotif|date('Y-m-d')}}</td>
-                    {% if fiche.etat.libelle == 'En cours' %}
-                        <td><span class="badge badge-info" style="font-size: 18px;"><i class="far fa-clock"></i></span></td>
-                    {% elseif fiche.etat.libelle == 'Valide' %}
-                        <td><span class="badge badge-success" style="font-size: 18px;"><i class="far fa-check-square"></i></span></td>
+                    {% set i = i + 1 %}
+                    {% if fiche.mois|date('m') == 01 %}
+                        {% set mois = 'Janvier' %}
+                    {% elseif fiche.mois|date('m') == 02 %}
+                        {% set mois = 'Février' %}
+                    {% elseif fiche.mois|date('m') == 03 %}
+                        {% set mois = 'Mars' %}
+                    {% elseif fiche.mois|date('m') == 04 %}
+                        {% set mois = 'Avril' %}
+                    {% elseif fiche.mois|date('m') == 05 %}
+                        {% set mois = 'Mai' %}
+                    {% elseif fiche.mois|date('m') == 06 %}
+                        {% set mois = 'Juin' %}
+                    {% elseif fiche.mois|date('m') == 07 %}
+                        {% set mois = 'Juillet' %}
+                    {% elseif fiche.mois|date('m') == 08 %}
+                        {% set mois = 'Août' %}
+                    {% elseif fiche.mois|date('m') == 09 %}
+                        {% set mois = 'Septembre' %}
+                    {% elseif fiche.mois|date('m') == 10 %}
+                        {% set mois = 'Octobre' %}
+                    {% elseif fiche.mois|date('m') == 11 %}
+                        {% set mois = 'Novembre' %}
+                    {% elseif fiche.mois|date('m') == 12 %}
+                        {% set mois = 'Décembre' %}
                     {% endif %}
-                    <td><a href="{{ path('fichesInfoByUser', { 'id' : fiche.id }) }}" class="btn btn-outline-secondary">Voir le détail</a></td>
-                </tr>
+                    <tr>
+                        <td>{{ fiche.id }}</td>
+                        <td>{{ mois }} {{ fiche.mois|date('Y') }}</td>
+                        <td>{{ fiche.nbJustificatifs }}</td>
+                        <td>{{ fiche.montantValide }}</td>
+                        <td>{{ fiche.dateMotif|date('Y-m-d') }}</td>
+                        {% if fiche.etat.libelle == 'En cours' %}
+                            <td><span class="badge badge-info" style="font-size: 18px;"><i
+                                            class="far fa-clock"></i></span></td>
+                        {% elseif fiche.etat.libelle == 'Valide' %}
+                            <td><span class="badge badge-success" style="font-size: 18px;"><i
+                                            class="far fa-check-square"></i></span></td>
+                        {% endif %}
+                        <td><a href="{{ path('fichesInfoByUser', { 'id' : fiche.id }) }}"
+                               class="btn btn-outline-secondary">Voir le détail</a></td>
+                    </tr>
                 {% endfor %}
                 </tbody>
             </table>
@@ -63,7 +104,9 @@
     </div>
 
     <div class="copyright py-4 text-center text-white" style="height: 75px;">
-        <div class="container"><small>Copyright ©&nbsp;GSB 2019</small></div>
+        <div class="container">
+            <small>Copyright ©&nbsp;GSB 2019</small>
+        </div>
     </div>
     {% block javascripts %}
         <script src="https://kit.fontawesome.com/f07fb1e49e.js"></script>
