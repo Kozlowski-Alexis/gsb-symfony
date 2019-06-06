@@ -39,49 +39,47 @@
             </div>
         </div>
     </nav>
-    <header class="masthead bg-primary text-white text-center" style="height: 651px;">
-        <div class="container"><img class="img-fluid d-block mx-auto mb-5" src="{{ asset('asset/img/profile.png') }}">
-            <h1>{{ user.nom }}&nbsp{{ user.prenom }}</h1>
-            <hr class="star-light">
-        </div>
-    </header>
-    <div class="features-boxed">
-        <div class="container">
-            <div class="intro">
-                <h2 class="text-center">Mes Informations</h2>
-            </div>
-            <div class="row justify-content-center features">
-                <div class="col-sm-6 col-md-5 col-lg-4 item">
-                    <div class="box"><i class="fas fa-map-marked-alt icon"></i>
-                        <h3 class="name">Adresse</h3>
-                        <p class="description">{{ user.adresse }}</p>
+
+    <div class="container" style="margin-top: 15vh; margin-bottom: 10vh">
+        <div class="row">
+            <div class="col-12">
+                <h1 class="display-4 pb-3">Saisie d'un frais forfait</h1>
+                {{ form_start(form) }}
+                <div class="form-group">
+                    {{ form_label(form.fraisForfait) }}
+                    {{ form_widget(form.fraisForfait) }}
+                    {% if form_errors(form.fraisForfait) == true %}
+                        <br /><div class="alert alert-danger" role="alert">
+                        {{ form_errors(form.fraisForfait) }}
                     </div>
+                    {% endif %}
                 </div>
-                <div class="col-sm-6 col-md-5 col-lg-4 item">
-                    <div class="box"><i class="fas fa-mail-bulk icon"></i>
-                        <h3 class="name">Code Postale</h3>
-                        <p class="description">{{ user.cp }}</p>
+                <div class="form-group">
+                    {{ form_label(form.date) }}
+                    {{ form_widget(form.date) }}
+                    {% if form_errors(form.date) == true %}
+                        <br /><div class="alert alert-danger" role="alert">
+                        {{ form_errors(form.date) }}
                     </div>
+                    {% endif %}
                 </div>
-                <div class="col-sm-6 col-md-5 col-lg-4 item">
-                    <div class="box"><i class="far fa-building icon"></i>
-                        <h3 class="name">Ville</h3>
-                        <p class="description">{{ user.ville }}</p>
+                <div class="form-group">
+                    {{ form_label(form.quantite) }}
+                    {{ form_widget(form.quantite) }}
+                    {% if form_errors(form.quantite) == true %}
+                        <br /><div class="alert alert-danger" role="alert">
+                        {{ form_errors(form.quantite) }}
                     </div>
+                    {% endif %}
                 </div>
-                <div class="col-sm-6 col-md-5 col-lg-4 item">
-                    <div class="box"><i class="far fa-calendar-alt icon"></i>
-                        <h3 class="name">Date embauche</h3>
-                        <p class="description">{{ user.dateEmbauche|date('Y-m-d') }}</p>
-                    </div>
-                </div>
+                {{ form_row(form.submit) }}
+                {{ form_end(form) }}
             </div>
         </div>
     </div>
+
     <div class="copyright py-4 text-center text-white fixed-bottom" style="height: 75px;">
         <div class="container"><small>Copyright ©&nbsp;GSB 2019</small></div>
     </div>
-    {% block javascripts %}
-        <script src="https://kit.fontawesome.com/f07fb1e49e.js"></script>
-    {% endblock %}
 {% endblock %}
+

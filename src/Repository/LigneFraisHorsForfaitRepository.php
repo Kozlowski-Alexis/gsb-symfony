@@ -19,6 +19,16 @@ class LigneFraisHorsForfaitRepository extends ServiceEntityRepository
         parent::__construct($registry, LigneFraisHorsForfait::class);
     }
 
+    public function getTotalByFiche($id)
+    {
+        return $this->createQueryBuilder('lfhf')
+            ->andWhere('lfhf.ficheFrais = :idFiche')
+            ->setParameter('idFiche', $id)
+            ->select('SUM(lfhf.montant) as montant')
+            ->getQuery()
+            ->getResult();
+    }
+
     // /**
     //  * @return LigneFraisHorsForfait[] Returns an array of LigneFraisHorsForfait objects
     //  */

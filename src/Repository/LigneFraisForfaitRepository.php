@@ -19,6 +19,17 @@ class LigneFraisForfaitRepository extends ServiceEntityRepository
         parent::__construct($registry, LigneFraisForfait::class);
     }
 
+    public function getTotalByFiche($id)
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT SUM(ff.montant * lff.quantite) as montant
+                FROM App\Entity\FraisForfait ff, App\Entity\LigneFraisForfait lff
+                WHERE lff.ficheFrais = :idFiche AND ff.id = lff.fraisForfait'
+        )->setParameter('idFiche', $id);
+        return $query->execute();
+    }
+
     // /**
     //  * @return LigneFraisForfait[] Returns an array of LigneFraisForfait objects
     //  */

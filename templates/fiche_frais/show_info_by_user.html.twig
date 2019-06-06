@@ -23,7 +23,7 @@
                         </button>
                         <div class="dropdown-menu" aria-labelledby="dropdownMenu1">
                             <a class="dropdown-item" href="{{ path('new_hors_forfait') }}">Frais Hors Forfait</a>
-                            <a class="dropdown-item" href="#!">Frais Forfait</a>
+                            <a class="dropdown-item" href="{{ path('new_frais_forfait') }}">Frais Forfait</a>
                         </div>
                     </li>
                     <li class="nav-item mx-0 mx-lg-1" role="presentation"><a
@@ -39,7 +39,7 @@
             </div>
         </div>
     </nav>
-    <div class="container-fluid" style="margin-top: 20vh">
+    <div class="container-fluid" style="margin-top: 20vh;margin-bottom: 10vh">
         {% if ficheFrais.mois|date('m') == 01 %}
         {% set mois = 'Janvier' %}
         {% elseif ficheFrais.mois|date('m') == 02 %}
@@ -67,6 +67,10 @@
         {% endif %}
         <h1 class="display-4 pb-3">Détails de la fiche de frais de {{ mois }} {{ ficheFrais.mois|date('Y') }}</h1>
 
+        <div class="alert alert-sucess">
+            Montant total de la fiche de frais : <strong>{{ montantTotal }} €</strong>
+        </div>
+
         {% for message in app.flashes('success') %}
             <div class="alert alert-success">
                 {{ message }}
@@ -75,7 +79,7 @@
 
         <div class="table-responsive">
             <h5>Liste des frais hors forfait</h5>
-            <span class="badge badge-warning mb-3">Montant total : </span>
+            <span class="badge badge-warning mb-3">Montant total : {% if montantTotalFHF is not null %}{{ montantTotalFHF }}{% else %}0{% endif %} €</span>
             <table class="table table-striped table-light">
                 <thead>
                 <tr>
@@ -96,7 +100,7 @@
             </table><br />
 
             <h5>Liste des frais forfait</h5>
-            <span class="badge badge-warning mb-3">Montant total : </span>
+            <span class="badge badge-warning mb-3">Montant total : {{ montantTotalFF }} €</span>
             <table class="table table-striped table-light">
                 <thead>
                 <tr>
@@ -108,13 +112,21 @@
                 </tr>
                 </thead>
                 <tbody>
-
+                {% for lFF in lignesFraisForfait %}
+                    <tr>
+                        <td>{{ lFF.fraisForfait.libelle }}</td>
+                        <td>{{ lFF.fraisForfait.montant }}</td>
+                        <td>{{ lFF.quantite }}</td>
+                        <td>{{ lFF.fraisForfait.montant * lFF.quantite }} €</td>
+                        <td>{{ lFF.date|date('d/m/Y') }}</td>
+                    </tr>
+                {% endfor %}
                 </tbody>
             </table>
         </div>
     </div>
 
-    <div class="copyright py-4 text-center text-white" style="height: 75px;">
+    <div class="copyright py-4 text-center text-white fixed-bottom" style="height: 75px;">
         <div class="container"><small>Copyright ©&nbsp;GSB 2019</small></div>
     </div>
     {% block javascripts %}

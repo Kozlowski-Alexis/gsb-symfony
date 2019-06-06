@@ -97,4 +97,14 @@ class FraisForfait
 
         return $this;
     }
+
+    /**
+     * toString
+     * @return string
+     */
+    public function __toString()
+    {
+        $toString = $this->getLibelle() . ' (' . $this->getMontant() . '€)';
+        return $toString;
+    }
 }

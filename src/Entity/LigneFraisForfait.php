@@ -22,14 +22,17 @@ class LigneFraisForfait
     private $quantite;
 
     /**
+     * @ORM\Column(type="datetime")
+     */
+    private $date;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\FraisForfait", inversedBy="ligneFraisForfaits")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $fraisForfait;
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\FicheFrais", inversedBy="ligneFraisForfaits")
-     * @ORM\JoinColumn(nullable=false)
      */
     private $ficheFrais;
 
@@ -72,5 +75,21 @@ class LigneFraisForfait
         $this->ficheFrais = $ficheFrais;
 
         return $this;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getDate() :?\DateTime
+    {
+        return $this->date;
+    }
+
+    /**
+     * @param \DateTime $date
+     */
+    public function setDate(\DateTime $date)
+    {
+        $this->date = $date;
     }
 }
