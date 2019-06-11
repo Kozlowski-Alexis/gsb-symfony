@@ -48,10 +48,10 @@ class LigneFraisForfaitController extends AbstractController
                     ->getRepository(Etat::class)
                     ->find(2);
                 $ficheFrais = new FicheFrais();
-                $ficheFrais->setMoisFiche(DateTime::createFromFormat('Y-m-d', $request->request->get('ligne_frais_forfait')['date']));
+                $ficheFrais->setMois(DateTime::createFromFormat('Y-m-d', $request->request->get('ligne_frais_forfait')['date']));
                 $ficheFrais->setNbJustificatifs(0);
                 $ficheFrais->setMontantValide(0);
-                $ficheFrais->setDateModif(new DateTime());
+                $ficheFrais->setDateMotif(new DateTime());
                 $ficheFrais->setUser($user);
                 $ficheFrais->setEtat($etat);
                 $ligneFraisForfait->setFicheFrais($ficheFrais);
