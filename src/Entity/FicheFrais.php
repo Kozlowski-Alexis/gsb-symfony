@@ -124,7 +124,7 @@ class FicheFrais
         return $this->user;
     }
 
-    public function setVisiteur(?User $user): self
+    public function setUser(?User $user): self
     {
         $this->user = $user;
 

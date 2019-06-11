@@ -47,7 +47,7 @@ class LigneFraisHorsForfaitController extends AbstractController
                 $ficheFrais->setMois(DateTime::createFromFormat('Y-m-d', $request->request->get('ligne_frais_hors_forfait')['date']));
                 $ficheFrais->setNbJustificatifs(0);
                 $ficheFrais->setMontantValide(0);
-                $ficheFrais->setDateModif(new DateTime());
+                $ficheFrais->setDateMotif(new DateTime());
                 $ficheFrais->setUser($user);
                 $ficheFrais->setEtat($etat);
                 $ligneFraisHorsForfait->setFicheFrais($ficheFrais);
