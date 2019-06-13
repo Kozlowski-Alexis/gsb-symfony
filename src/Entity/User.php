@@ -45,7 +45,7 @@ class User implements UserInterface, \Serializable
     private $adresse;
 
     /**
-     * @ORM\Column(type="string", length=5)
+     * @ORM\Column(type="string", length=10)
      */
     private $cp;
 
