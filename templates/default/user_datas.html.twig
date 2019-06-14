@@ -33,12 +33,15 @@
                                 class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ path('userDatas') }}">A Propos de
                             moi</a></li>
                     <li class="nav-item mx-0 mx-lg-1" role="presentation"><a
+                                class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger" href="{{ path('manage_all') }}">Valider Fiches</a></li>
+                    <li class="nav-item mx-0 mx-lg-1" role="presentation"><a
                                 class="nav-link py-3 px-0 px-lg-3 rounded js-scroll-trigger btn-danger" href="/logout">Deconnexion</a>
                     </li>
                 </ul>
             </div>
         </div>
     </nav>
+
     <header class="masthead bg-primary text-white text-center" style="height: 651px;">
         <div class="container"><img class="img-fluid d-block mx-auto mb-5" src="{{ asset('asset/img/profile.png') }}">
             <h1>{{ user.nom }}&nbsp{{ user.prenom }}</h1>
