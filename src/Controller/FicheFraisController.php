@@ -58,7 +58,6 @@ class FicheFraisController extends AbstractController
     }
 
     /**
-     * Affiche toutes les fiches de frais (seulement accessible au comptables)
      * @Route("/manage_all", name="manage_all")
      * @return Response
      */
@@ -74,7 +73,6 @@ class FicheFraisController extends AbstractController
 
     /**
      * @Route("/manage_details/{id}", name="manage_details")
-     * Affiche les details d'une fiche de frais (seulement accessible au comptable)
      * @param FicheFrais $fiche
      * @param Request $request
      * @return Response
@@ -135,6 +133,20 @@ class FicheFraisController extends AbstractController
             'montantTotalFHF' => $montantTotalFHF[0]['montant'],
             'montantTotalFF' => $montantTotalFF[0]['montant'],
             'montantTotal' => $montantTotal
+        ]);
+    }
+
+    /**
+     * @Route("/show_all_valid", name="show_all_valid")
+     * @return Response
+     */
+    public function showAll(): Response
+    {
+        $fichesFrais = $this->getDoctrine()
+            ->getRepository(FicheFrais::class)
+            ->findAllValid();
+        return $this->render('fiche_frais/show_all_valid.html.twig', [
+            'fichesFrais' => $fichesFrais
         ]);
     }
 

@@ -73,4 +73,16 @@ class FicheFraisRepository extends ServiceEntityRepository
         );
         return $query->execute();
     }
+
+    public function findAllValid()
+    {
+        $entityManager = $this->getEntityManager();
+        $query = $entityManager->createQuery(
+            'SELECT ff.id, IDENTITY(ff.user), IDENTITY(ff.etat), ff.mois, ff.nbJustificatifs, ff.montantValide, ff.dateMotif
+                FROM App\Entity\FicheFrais ff, App\Entity\Etat e
+                WHERE ff.etat = e.id
+                AND e.id = 1'
+        );
+        return $query->execute();
+    }
 }

@@ -63,45 +63,43 @@
                             <th scope="col"> Nombre de justificatifs</th>
                             <th scope="col"> Montant validé</th>
                             <th scope="col"> Date de validation</th>
-                            <th scope="col"> Gestion</th>
                         </tr>
                         </thead>
                         <tbody>
                         {% set i = 0 %}
                         {% for ficheFrais in fichesFrais %}
-                            {% set i = i + 1 %}
-                            {% if ficheFrais.mois|date('m') == 01 %}
-                                {% set mois = 'Janvier' %}
-                            {% elseif ficheFrais.mois|date('m') == 02 %}
-                                {% set mois = 'Février' %}
-                            {% elseif ficheFrais.mois|date('m') == 03 %}
-                                {% set mois = 'Mars' %}
-                            {% elseif ficheFrais.mois|date('m') == 04 %}
-                                {% set mois = 'Avril' %}
-                            {% elseif ficheFrais.mois|date('m') == 05 %}
-                                {% set mois = 'Mai' %}
-                            {% elseif ficheFrais.mois|date('m') == 06 %}
-                                {% set mois = 'Juin' %}
-                            {% elseif ficheFrais.mois|date('m') == 07 %}
-                                {% set mois = 'Juillet' %}
-                            {% elseif ficheFrais.mois|date('m') == 08 %}
-                                {% set mois = 'Août' %}
-                            {% elseif ficheFrais.mois|date('m') == 09 %}
-                                {% set mois = 'Septembre' %}
-                            {% elseif ficheFrais.mois|date('m') == 10 %}
-                                {% set mois = 'Octobre' %}
-                            {% elseif ficheFrais.mois|date('m') == 11 %}
-                                {% set mois = 'Novembre' %}
-                            {% elseif ficheFrais.mois|date('m') == 12 %}
-                                {% set mois = 'Décembre' %}
-                            {% endif %}
-                            <tr>
-                                <td>{{ mois }} {{ ficheFrais.mois|date('Y') }}</td>
-                                <td>{{ ficheFrais.nbJustificatifs }}</td>
-                                <td>{{ ficheFrais.montantValide }}€</td>
-                                <td>{{ ficheFrais.dateMotif|date('d/m/Y') }}</td>
-                                <td><a href="{{ path('manage_details', { 'id' : ficheFrais.id }) }}" class="btn btn-outline-dark btn-sm">Gérer la fiche</a></td>
-                        {% endfor %}
+                        {% set i = i + 1 %}
+                        {% if ficheFrais.mois|date('m') == 01 %}
+                            {% set mois = 'Janvier' %}
+                        {% elseif ficheFrais.mois|date('m') == 02 %}
+                            {% set mois = 'Février' %}
+                        {% elseif ficheFrais.mois|date('m') == 03 %}
+                            {% set mois = 'Mars' %}
+                        {% elseif ficheFrais.mois|date('m') == 04 %}
+                            {% set mois = 'Avril' %}
+                        {% elseif ficheFrais.mois|date('m') == 05 %}
+                            {% set mois = 'Mai' %}
+                        {% elseif ficheFrais.mois|date('m') == 06 %}
+                            {% set mois = 'Juin' %}
+                        {% elseif ficheFrais.mois|date('m') == 07 %}
+                            {% set mois = 'Juillet' %}
+                        {% elseif ficheFrais.mois|date('m') == 08 %}
+                            {% set mois = 'Août' %}
+                        {% elseif ficheFrais.mois|date('m') == 09 %}
+                            {% set mois = 'Septembre' %}
+                        {% elseif ficheFrais.mois|date('m') == 10 %}
+                            {% set mois = 'Octobre' %}
+                        {% elseif ficheFrais.mois|date('m') == 11 %}
+                            {% set mois = 'Novembre' %}
+                        {% elseif ficheFrais.mois|date('m') == 12 %}
+                            {% set mois = 'Décembre' %}
+                        {% endif %}
+                        <tr>
+                            <td>{{ mois }} {{ ficheFrais.mois|date('Y') }}</td>
+                            <td>{{ ficheFrais.nbJustificatifs }}</td>
+                            <td>{{ ficheFrais.montantValide }}€</td>
+                            <td>{{ ficheFrais.dateMotif|date('d/m/Y') }}</td>
+                            {% endfor %}
                         </tbody>
                     </table>
                 </div>
