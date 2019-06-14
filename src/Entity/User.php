@@ -60,6 +60,11 @@ class User implements UserInterface, \Serializable
     private $dateEmbauche;
 
     /**
+     * @ORM\Column(type="json")
+     */
+    private $roles;
+
+    /**
      * @ORM\OneToMany(targetEntity="App\Entity\FicheFrais", mappedBy="visiteur")
      */
     private $ficheFrais;
@@ -135,6 +140,25 @@ class User implements UserInterface, \Serializable
         return $this;
     }
 
+    /**
+     * @return array (Role|string)[] The user roles
+     */
+    public function getRoles(): array
+    {
+        $roles = $this->roles;
+        // guarantee every user at least has ROLE_USER
+        $roles[] = 'ROLE_USER';
+
+        return array_unique($roles);
+    }
+
+    public function setRoles(array $roles): self
+    {
+        $this->roles = $roles;
+
+        return $this;
+    }
+
     public function getDateEmbauche(): ?\DateTimeInterface
     {
         return $this->dateEmbauche;
@@ -176,25 +200,6 @@ class User implements UserInterface, \Serializable
         }
 
         return $this;
-    }
-
-    /**
-     * Returns the roles granted to the user.
-     *
-     *     public function getRoles()
-     *     {
-     *         return ['ROLE_USER'];
-     *     }
-     *
-     * Alternatively, the roles might be stored on a ``roles`` property,
-     * and populated in any number of different ways when the user object
-     * is created.
-     *
-     * @return array (Role|string)[] The user roles
-     */
-    public function getRoles()
-    {
-        return ['ROLE_ADMIN'];
     }
 
 

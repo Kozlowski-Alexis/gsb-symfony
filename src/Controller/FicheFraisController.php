@@ -63,6 +63,7 @@ class FicheFraisController extends AbstractController
      */
     public function manageAll(): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_COMPTABLE');
         $fichesFrais = $this->getDoctrine()
             ->getRepository(FicheFrais::class)
             ->findAllNotValid();
@@ -79,6 +80,7 @@ class FicheFraisController extends AbstractController
      */
     public function manageDetails(FicheFrais $fiche, Request $request): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_COMPTABLE');
         $user = $this->getUser();
         // Récupère la fiche de frais en fonction de l'utilisateur et de l'id de la fiche de frais
         $ficheFrais = $this->getDoctrine()

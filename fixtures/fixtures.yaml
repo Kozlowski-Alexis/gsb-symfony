@@ -1,47 +1,47 @@
 parameters:
   hash: $2y$12$QymKqdoh1vDMW2OoEFy0GOBPT2jNhjiZaJvwuOSbTX4dutQF/PIN6
 
-App\Entity\FicheFrais:
-  ficheFrais{1..50}:
-    user: '@user<numberBetween(1, 10)>'
-    etat: '@etat2'
-    mois: '<datetime()>'
-    nbJustificatifs: 0
-    montantValide: 0
-    dateMotif: '<datetimeBetween("-200 days", "now")>'
-
-
-App\Entity\FraisForfait:
-  fraisForfait1:
-    libelle: 'Forfait Etape'
-    montant: 115
-
-  fraisForfait2:
-    libelle: 'Frais Kilométrique'
-    montant: 1.5
-
-  fraisForfait3:
-    libelle: 'Nuitée Hôtel'
-    montant: 80
-
-  fraisForfait4:
-    libelle: 'Repas Restaurant'
-    montant: 18
-
-
-App\Entity\LigneFraisForfait:
-  ligneFraisForfait{1..100}:
-    fraisForfait: '@fraisForfait<numberBetween(1, 4)>'
-    ficheFrais: '@ficheFrais<numberBetween(1, 50)>'
-    quantite: '<numberBetween(1, 50)>'
-    date: '<datetimeBetween("-300 days", "now")>'
-
-App\Entity\LigneFraisHorsForfait:
-  ligneFraisHorsForfait{1..100}:
-    ficheFrais: '@ficheFrais<numberBetween(1, 50)>'
-    libelle: '<randomElement(["Achat Vehicule","Soins","Repas 12h", "Transport hors voiture", "Achat Divers"])>'
-    date: '<datetimeBetween("-300 days", "now")>'
-    montant: '<numberBetween(20, 5000)>'
+#App\Entity\FicheFrais:
+#  ficheFrais{1..50}:
+#    user: '@user<numberBetween(1, 10)>'
+#    etat: '@etat2'
+#    mois: '<datetime()>'
+#    nbJustificatifs: 0
+#    montantValide: 0
+#    dateMotif: '<datetimeBetween("-200 days", "now")>'
+#
+#
+#App\Entity\FraisForfait:
+#  fraisForfait1:
+#    libelle: 'Forfait Etape'
+#    montant: 115
+#
+#  fraisForfait2:
+#    libelle: 'Frais Kilométrique'
+#    montant: 1.5
+#
+#  fraisForfait3:
+#    libelle: 'Nuitée Hôtel'
+#    montant: 80
+#
+#  fraisForfait4:
+#    libelle: 'Repas Restaurant'
+#    montant: 18
+#
+#
+#App\Entity\LigneFraisForfait:
+#  ligneFraisForfait{1..100}:
+#    fraisForfait: '@fraisForfait<numberBetween(1, 4)>'
+#    ficheFrais: '@ficheFrais<numberBetween(1, 50)>'
+#    quantite: '<numberBetween(1, 50)>'
+#    date: '<datetimeBetween("-300 days", "now")>'
+#
+#App\Entity\LigneFraisHorsForfait:
+#  ligneFraisHorsForfait{1..100}:
+#    ficheFrais: '@ficheFrais<numberBetween(1, 50)>'
+#    libelle: '<randomElement(["Achat Vehicule","Soins","Repas 12h", "Transport hors voiture", "Achat Divers"])>'
+#    date: '<datetimeBetween("-300 days", "now")>'
+#    montant: '<numberBetween(20, 5000)>'
 
 App\Entity\User:
   user{1..10}:
@@ -53,23 +53,23 @@ App\Entity\User:
     cp: '<postcode()>'
     ville: '<country()>'
     dateEmbauche: '<datetimeBetween("-800 days", "now")>'
-#    roles: '[ROLE_USER]'
+    roles: '[ROLE_USER]'
 
-#  user{6..10}:
-#    nom: '<firstname()>'
-#    prenom: '<lastname()>'
-#    username: '<username()>'
-#    password: '<{hash}>'
-#    adresse: '<streetName()>'
-#    cp: '<postcode()>'
-#    ville: '<country()>'
-#    dateEmbauche: '<datetimeBetween("-800 days", "now")>'
-#    roles: '[ROLE_COMPTABLE]'
+  user{6..10}:
+    nom: '<firstname()>'
+    prenom: '<lastname()>'
+    username: '<username()>'
+    password: '<{hash}>'
+    adresse: '<streetName()>'
+    cp: '<postcode()>'
+    ville: '<country()>'
+    dateEmbauche: '<datetimeBetween("-800 days", "now")>'
+    roles: '[ROLE_COMPTABLE]'
 
 
-App\Entity\Etat:
-  etat1:
-    libelle: 'Valide'
-
-  etat2:
-    libelle: 'En cours'
+#App\Entity\Etat:
+#  etat1:
+#    libelle: 'Valide'
+#
+#  etat2:
+#    libelle: 'En cours'
